@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
+import FetchData from "./components/FetchData/FetchData";
+import SearchBar from "./components/SearchBar/SearchBar";
+import WeatherDisplay from "./components/WeatherDisplay/WeatherDisplay";
 
 function App() {
+  const [weatherData, setWeatherData] = useState({});
+
+  useEffect(() => {
+    console.log(weatherData);
+  }, [weatherData]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Weather App</h1>
+      <FetchData weatherData={weatherData} setWeatherData={setWeatherData} />
+      <SearchBar setWeatherData={setWeatherData} />
+      <WeatherDisplay weatherData={weatherData} />
     </div>
   );
 }
