@@ -2,19 +2,8 @@ import React from "react";
 
 const FetchData = ({ weatherData, setWeatherData }) => {
   const getData = () => {
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": `${process.env.REACT_APP_API_KEY}`,
-        "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
-      },
-    };
-
     if (weatherData?.city) {
-      fetch(
-        `https://weatherapi-com.p.rapidapi.com/current.json?q=${weatherData.city}`,
-        options
-      )
+      fetch(`/.netlify/functions/fetchCall/?q=${weatherData.city}`)
         .then((response) => response.json())
         .then((response) => {
           setWeatherData((data) => ({
